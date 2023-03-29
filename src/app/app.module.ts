@@ -18,9 +18,10 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CartComponent } from './components/cart/cart.component';
+import { PurchaseComponent } from './pages/purchase/purchase.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, HomeComponent, CartComponent],
+  declarations: [AppComponent, HeaderComponent, HomeComponent, CartComponent, PurchaseComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
