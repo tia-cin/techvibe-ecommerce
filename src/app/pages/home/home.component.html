@@ -3,8 +3,9 @@
     <app-filters (currentCategory)="currentCategory($event)"></app-filters>
   </mat-drawer>
   <mat-drawer-content class="p-6">
-    <app-products-header
-      (colsChange)="colsChange($event)"
+    <app-products-header (colsChange)="colsChange($event)">
+      <mat-grid-list gutterSize="16" [cols]="cols" [rowHeight]="rowHeight">
+        <mat-grid-tile> </mat-grid-tile></mat-grid-list
     ></app-products-header>
   </mat-drawer-content>
 </mat-drawer-container>
