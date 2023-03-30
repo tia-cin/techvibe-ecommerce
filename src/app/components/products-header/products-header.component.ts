@@ -1,20 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-products-header',
-  template: `
-    <p>
-      products-header works!
-    </p>
-  `,
-  styles: [
-  ]
+  selector: "app-products-header",
+  templateUrl: "./products-header.component.html",
 })
 export class ProductsHeaderComponent implements OnInit {
+  sort = "A - Z";
+  constructor() {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  onSortUpdated(sortBy: string): void {
+    this.sort = sortBy;
   }
-
 }
