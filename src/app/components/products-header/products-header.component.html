@@ -3,11 +3,34 @@
     <div>
       <button mat-button [matMenuTriggerFor]="sortByMenu">
         Sort by {{ sort }}
+        <mat-icon>expand_more</mat-icon>
       </button>
       <mat-menu #sortByMenu="matMenu">
         <button mat-menu-item (click)="onSortUpdated('A - Z')">A - Z</button>
         <button mat-menu-item (click)="onSortUpdated('Z - A')">Z - A</button>
       </mat-menu>
+    </div>
+    <div class="flex items-center">
+      <div>
+        <button mat-button [matMenuTriggerFor]="menu">
+          Show {{ itemsCount }}
+          <mat-icon>expand_more</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="onItemsDisplayed(6)">6</button>
+          <button mat-menu-item (click)="onItemsDisplayed(12)">12</button>
+          <button mat-menu-item (click)="onItemsDisplayed(24)">24</button>
+        </mat-menu>
+      </div>
+      <button (click)="onColsDisplay(1)">
+        <mat-icon>view_list</mat-icon>
+      </button>
+      <button (click)="onColsDisplay(3)">
+        <mat-icon>view_module</mat-icon>
+      </button>
+      <button (click)="onColsDisplay(5)">
+        <mat-icon>view_comfy</mat-icon>
+      </button>
     </div>
   </div>
 </mat-card>

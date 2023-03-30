@@ -5,7 +5,13 @@ import { Component, OnInit } from "@angular/core";
   templateUrl: "./home.component.html",
 })
 export class HomeComponent implements OnInit {
+  cols = 3;
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  colsChange(cols: number): void {
+    this.cols = cols;
+  }
 }
