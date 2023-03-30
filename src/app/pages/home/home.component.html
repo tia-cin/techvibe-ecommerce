@@ -1,6 +1,6 @@
 <mat-drawer-container [autosize]="true" class="h-screen w-full">
   <mat-drawer mode="side" opened class="p-8">
-    <div>Filters</div>
+    <app-filters (currentCategory)="currentCategory($event)"></app-filters>
   </mat-drawer>
   <mat-drawer-content class="p-6">
     <app-products-header
