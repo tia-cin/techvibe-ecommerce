@@ -59,4 +59,15 @@ export class PurchaseService {
     this.cart.next({ items: filteredItems });
     this._snackBar.open("1 item removed from cart!", "OK", { duration: 3000 });
   }
+
+  emptyCart(): void {
+    this.cart.next({ items: [] });
+    this._snackBar.open("Cart is Empty!", "OK", { duration: 3000 });
+  }
+
+  getTotal(items: CartItem[]): number {
+    return items
+      .map((item: CartItem) => item.price * item.quantity)
+      .reduce((prev, curr): number => prev + curr, 0);
+  }
 }
