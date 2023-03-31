@@ -22,4 +22,8 @@ export class StoreService {
       }&limit=${limit}`
     );
   }
+
+  getCategories(): Observable<string[]> {
+    return this.httpClient.get<string[]>(`${API_URL}/products/categories`);
+  }
 }
