@@ -33,4 +33,20 @@ export class PurchaseComponent implements OnInit {
       }
     );
   }
+
+  getTotal(items: CartItem[]): number {
+    return this.purchaseService.getTotal(items);
+  }
+
+  onAddQuantity(item: CartItem): void {
+    this.purchaseService.addToCart(item);
+  }
+
+  onRemoveItem(item: CartItem): void {
+    this.purchaseService.removeQuantity(item);
+  }
+
+  onEmptyCart(): void {
+    this.purchaseService.emptyCart();
+  }
 }
