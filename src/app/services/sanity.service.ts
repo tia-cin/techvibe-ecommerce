@@ -9,7 +9,7 @@ import imageUrlBuilder from "@sanity/image-url";
   providedIn: "root",
 })
 export class SanityService {
-  data: any;
+  data: any[] = [];
   constructor() {}
 
   sanityClientCredentials = {
@@ -25,14 +25,25 @@ export class SanityService {
     imageUrlBuilder(this.sanityClientCredentials.option).image(source);
 
   async ngOnInit() {
-    var productQuery = "[_type == 'product']";
-    var bannerQuery = "[_type == 'banner']";
+    const productQuery = "[_type == 'product']";
+    const bannerQuery = "[_type == 'banner']";
 
-    let data1 = await this.sanityClientCredentials.option.fetch(productQuery);
-    let data2 = await this.sanityClientCredentials.option.fetch(bannerQuery);
+    const data1 = await this.sanityClientCredentials.option.fetch(productQuery);
+    const data2 = await this.sanityClientCredentials.option.fetch(bannerQuery);
 
-    this.data = { data1, data2 };
+    this.data = [data1, data2];
 
     console.log(this.data);
+  }
+
+  getProducts(limit = "12", sort = "desc", category?: string): Product[] {
+    return this.data
+      .slice(Number(limit))
+      .sort(() => (sort === "desc" ? 1 : -1))
+      .filter((p) => (category ? p.category === category : p));
+  }
+
+  getCategories(): string[] {
+    return this.data[0].map((p: Product) => p.category);
   }
 }
