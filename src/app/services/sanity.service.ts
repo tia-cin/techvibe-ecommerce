@@ -1,6 +1,4 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
 import { Product } from "../types";
 import sanityClient from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
@@ -32,8 +30,6 @@ export class SanityService {
     const data2 = await this.sanityClientCredentials.option.fetch(bannerQuery);
 
     this.data = [data1, data2];
-
-    console.log(this.data);
   }
 
   getProducts(limit = "12", sort = "desc", category?: string): Product[] {
