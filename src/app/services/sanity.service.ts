@@ -16,6 +16,7 @@ export class SanityService {
     option: sanityClient({
       projectId: "wrbpjeis",
       dataset: "production",
+      useCdn: true,
       token: process.env["TOKEN"],
     }),
   };

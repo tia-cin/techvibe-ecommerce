@@ -12,9 +12,23 @@ export interface CartItem {
 
 export interface Product {
   id: number;
-  title: string;
+  name: string;
   price: number;
   category: string;
-  description: string;
+  details: string;
   image: string;
+  slug: string;
+}
+
+export interface Banner {
+  image: string | any;
+  buttonText: string;
+  product: string;
+  desc: string;
+  smallText: string;
+  midText: string;
+  largeText1: string;
+  largeText2: string;
+  discount: string;
+  saleTime: string;
 }
