@@ -24,6 +24,7 @@ import { CardComponent } from "./components/card/card.component";
 import { ProductsHeaderComponent } from "./components/products-header/products-header.component";
 import { HeaderBannerComponent } from "./components/header-banner/header-banner.component";
 import { FooterBannerComponent } from "./components/footer-banner/footer-banner.component";
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { FooterBannerComponent } from "./components/footer-banner/footer-banner.
     ProductsHeaderComponent,
     HeaderBannerComponent,
     FooterBannerComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
