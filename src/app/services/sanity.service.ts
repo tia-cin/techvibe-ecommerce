@@ -30,6 +30,7 @@ export class SanityService {
     const data2 = await this.sanityClientCredentials.option.fetch(bannerQuery);
 
     this.data = [data1, data2];
+    return this.data;
   }
 
   getProducts(limit = "12", sort = "desc", category?: string): Product[] {
