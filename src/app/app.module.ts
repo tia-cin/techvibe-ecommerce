@@ -15,18 +15,27 @@ import { MatListModule } from "@angular/material/list";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { HeaderComponent } from './components/header/header.component';
-import { HomeComponent } from './pages/home/home.component';
-import { CartComponent } from './components/cart/cart.component';
-import { PurchaseComponent } from './pages/purchase/purchase.component';
-import { FiltersComponent } from './components/filters/filters.component';
-import { CardComponent } from './components/card/card.component';
-import { ProductsHeaderComponent } from './components/products-header/products-header.component';
-import { BannerComponent } from './banner/banner.component';
-import { HeaderBannerComponent } from './header-banner/header-banner.component';
+import { HeaderComponent } from "./components/header/header.component";
+import { HomeComponent } from "./pages/home/home.component";
+import { CartComponent } from "./components/cart/cart.component";
+import { PurchaseComponent } from "./pages/purchase/purchase.component";
+import { FiltersComponent } from "./components/filters/filters.component";
+import { CardComponent } from "./components/card/card.component";
+import { ProductsHeaderComponent } from "./components/products-header/products-header.component";
+import { HeaderBannerComponent } from "./header-banner/header-banner.component";
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, HomeComponent, CartComponent, PurchaseComponent, FiltersComponent, CardComponent, ProductsHeaderComponent, BannerComponent, HeaderBannerComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    HomeComponent,
+    CartComponent,
+    PurchaseComponent,
+    FiltersComponent,
+    CardComponent,
+    ProductsHeaderComponent,
+    HeaderBannerComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

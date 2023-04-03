@@ -1,11 +1,14 @@
-<mat-toolbar class="w-full justify-between items-center">
-  <a routerLink="home" class="flex items-center">
-    <span> TechVibe </span>
-  </a>
-  <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon [matBadge]="3" matBadgeColor="accent">shopping_cart</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu" class="bg-gray-300">
-    <app-cart></app-cart>
-  </mat-menu>
-</mat-toolbar>
+<nav class="bg-zinc-800">
+  <mat-toolbar class="w-full justify-between items-center">
+    <a routerLink="home" class="flex items-center">
+      <span> TechVibe </span>
+    </a>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon [matBadge]="3" matBadgeColor="accent">shopping_cart</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" class="bg-gray-300">
+      <app-cart></app-cart>
+    </mat-menu>
+  </mat-toolbar>
+  <app-header-banner></app-header-banner>
+</nav>
