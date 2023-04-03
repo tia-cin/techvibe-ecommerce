@@ -1,0 +1,5 @@
+<mat-card *ngIf="cart.items.length"> </mat-card>
+<mat-card *ngIf="!cart.items.length">
+  <p>Cart is empty</p>
+  <button mat-raised-button routerLink="/home">Go Shopping</button>
+</mat-card>

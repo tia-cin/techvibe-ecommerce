@@ -20,33 +20,30 @@ export class PurchaseComponent implements OnInit {
     "total",
     "action",
   ];
-  constructor(
-    private purchaseService: PurchaseService,
-    private http: HttpClient
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.cartSubscription = this.purchaseService.cart.subscribe(
-      (_cart: Cart) => {
-        this.cart = _cart;
-        this.dataSource = _cart.items;
-      }
-    );
+    // this.cartSubscription = this.purchaseService.cart.subscribe(
+    //   (_cart: Cart) => {
+    //     this.cart = _cart;
+    //     this.dataSource = _cart.items;
+    //   }
+    // );
   }
 
-  getTotal(items: CartItem[]): number {
-    return this.purchaseService.getTotal(items);
-  }
+  // getTotal(items: CartItem[]): number {
+  //   return this.purchaseService.getTotal(items);
+  // }
 
-  onAddQuantity(item: CartItem): void {
-    this.purchaseService.addToCart(item);
-  }
+  // onAddQuantity(item: CartItem): void {
+  //   this.purchaseService.addToCart(item);
+  // }
 
-  onRemoveItem(item: CartItem): void {
-    this.purchaseService.removeQuantity(item);
-  }
+  // onRemoveItem(item: CartItem): void {
+  //   this.purchaseService.removeQuantity(item);
+  // }
 
-  onEmptyCart(): void {
-    this.purchaseService.emptyCart();
-  }
+  // onEmptyCart(): void {
+  //   this.purchaseService.emptyCart();
+  // }
 }
