@@ -22,7 +22,8 @@ import { PurchaseComponent } from "./pages/purchase/purchase.component";
 import { FiltersComponent } from "./components/filters/filters.component";
 import { CardComponent } from "./components/card/card.component";
 import { ProductsHeaderComponent } from "./components/products-header/products-header.component";
-import { HeaderBannerComponent } from "./header-banner/header-banner.component";
+import { HeaderBannerComponent } from "./components/header-banner/header-banner.component";
+import { FooterBannerComponent } from "./components/footer-banner/footer-banner.component";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { HeaderBannerComponent } from "./header-banner/header-banner.component";
     CardComponent,
     ProductsHeaderComponent,
     HeaderBannerComponent,
+    FooterBannerComponent,
   ],
   imports: [
     BrowserModule,
