@@ -18,6 +18,13 @@ export class PurchaseComponent implements OnInit {
         id: 1,
         quantity: 2,
       },
+      {
+        image: "https://via.placeholder.com/150",
+        name: "product test",
+        price: 100,
+        id: 2,
+        quantity: 2,
+      },
     ],
   };
   dataSource: CartItem[] = [];
@@ -30,52 +37,9 @@ export class PurchaseComponent implements OnInit {
     "total",
     "action",
   ];
-  constructor(
-    private purchaseService: PurchaseService,
-    private http: HttpClient
-  ) {}
+  constructor(private purchaseService: PurchaseService) {}
 
   ngOnInit(): void {
-    this.cartSubscription = this.purchaseService.cart.subscribe(
-      (_cart: Cart) => {
-        this.cart = _cart;
-        this.dataSource = _cart.items;
-      }
-    );
+    this.dataSource = this.cart.items;
   }
-
-  getTotal(items: CartItem[]): number {
-    return this.purchaseService.getTotal(items);
-  }
-
-  onAddQuantity(item: CartItem): void {
-    this.purchaseService.addToCart(item);
-  }
-
-  onRemoveItem(item: CartItem): void {
-    this.purchaseService.removeQuantity(item);
-  }
-
-  onEmptyCart(): void {
-    this.purchaseService.emptyCart();
-  }
-
-  // onCheckout(): void {
-  //   this.http
-  //     .post('http://localhost:4242/checkout', {
-  //       items: this.cart.items,
-  //     })
-  //     .subscribe(async (res: any) => {
-  //       let stripe = await loadStripe('your token');
-  //       stripe?.redirectToCheckout({
-  //         sessionId: res.id,
-  //       });
-  //     });
-  // }
-
-  // ngOnDestroy() {
-  //   if (this.cartSubscription) {
-  //     this.cartSubscription.unsubscribe();
-  //   }
-  // }
 }

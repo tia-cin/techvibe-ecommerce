@@ -1,4 +1,4 @@
-<mat-card *ngIf="cart.items.length">
+<mat-card *ngIf="cart.items.length" class="h-screen">
   <table mat-table [dataSource]="dataSource" class="w-full">
     <ng-container matColumnDef="product">
       <th mat-header-cell *matHeaderCellDef>Product</th>
@@ -18,7 +18,9 @@
     </ng-container>
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef>Price</th>
-      <td mat-cell *matCellDef="let element">{{ element.price | currency }}</td>
+      <td mat-cell *matCellDef="let element">
+        {{ element.price | currency }}
+      </td>
       <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
     <ng-container matColumnDef="quantity">
@@ -36,11 +38,9 @@
     </ng-container>
     <ng-container matColumnDef="total">
       <th mat-header-cell *matHeaderCellDef>Total</th>
-      <td mat-cell *matCellDef="let element">
-        {{ element.quantity * element.price | currency }}
-      </td>
+      <td mat-cell *matCellDef="let element">100</td>
       <td mat-footer-cell *matFooterCellDef>
-        <span class="font-bold py-5 block">{{ currency | 100 }}</span>
+        <span class="font-bold py-5 block">100</span>
       </td>
     </ng-container>
     <ng-container matColumnDef="action">
@@ -61,11 +61,11 @@
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="currCols"></tr>
-    <tr mat-row *matRowDef="let row; cols: currCols"></tr>
+    <tr mat-row *matRowDef="let row; columns: currCols"></tr>
     <tr mat-footer-row *matFooterRowDef="currCols"></tr>
   </table>
 </mat-card>
-<mat-card *ngIf="!cart.items.length">
+<mat-card *ngIf="!cart.items.length" class="h-screen">
   <p>Cart is empty</p>
   <button mat-raised-button routerLink="/home">Go Shopping</button>
 </mat-card>
