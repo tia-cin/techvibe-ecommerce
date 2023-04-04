@@ -22,4 +22,6 @@ export class HomeComponent implements OnInit {
   currentCategory(categ: string): void {
     this.category = categ;
   }
+
+  onAddToCart(): void {}
 }

@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
+
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatMenuModule } from "@angular/material/menu";
@@ -12,19 +13,25 @@ import { MatTableModule } from "@angular/material/table";
 import { MatBadgeModule } from "@angular/material/badge";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatListModule } from "@angular/material/list";
+
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { HeaderComponent } from "./components/header/header.component";
+
 import { HomeComponent } from "./pages/home/home.component";
-import { CartComponent } from "./components/cart/cart.component";
 import { PurchaseComponent } from "./pages/purchase/purchase.component";
+
+import { HeaderComponent } from "./components/header/header.component";
+import { CartComponent } from "./components/cart/cart.component";
 import { FiltersComponent } from "./components/filters/filters.component";
 import { CardComponent } from "./components/card/card.component";
 import { ProductsHeaderComponent } from "./components/products-header/products-header.component";
 import { HeaderBannerComponent } from "./components/header-banner/header-banner.component";
 import { FooterBannerComponent } from "./components/footer-banner/footer-banner.component";
-import { FooterComponent } from './components/footer/footer.component';
+import { FooterComponent } from "./components/footer/footer.component";
+
+import { PurchaseService } from "./services/purchase.service";
+import { SanityService } from "./services/sanity.service";
 
 @NgModule({
   declarations: [
@@ -57,7 +64,7 @@ import { FooterComponent } from './components/footer/footer.component';
     MatSnackBarModule,
     MatListModule,
   ],
-  providers: [],
+  providers: [PurchaseService, SanityService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
