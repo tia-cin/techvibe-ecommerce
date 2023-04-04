@@ -3,9 +3,14 @@
     <span> TechVibe </span>
   </a>
   <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon [matBadge]="3" matBadgeColor="accent">shopping_cart</mat-icon>
+    <mat-icon
+      [matBadge]="itemsQuantity"
+      [matBadgeHidden]="!itemsQuantity"
+      matBadgeColor="accent"
+      >shopping_cart</mat-icon
+    >
   </button>
   <mat-menu #menu="matMenu" class="bg-gray-300">
-    <app-cart></app-cart>
+    <app-cart [itemsQuantity]="itemsQuantity" [cart]="cart"></app-cart>
   </mat-menu>
 </mat-toolbar>
