@@ -9,7 +9,17 @@ import { Subscription } from "rxjs";
   templateUrl: "./purchase.component.html",
 })
 export class PurchaseComponent implements OnInit {
-  cart: Cart = { items: [] };
+  cart: Cart = {
+    items: [
+      {
+        image: "https://via.placeholder.com/150",
+        name: "product test",
+        price: 120,
+        id: 1,
+        quantity: 2,
+      },
+    ],
+  };
   dataSource: CartItem[] = [];
   cartSubscription: undefined | Subscription;
   currCols: string[] = [
