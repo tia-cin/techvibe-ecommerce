@@ -42,4 +42,10 @@ export class PurchaseComponent implements OnInit {
   ngOnInit(): void {
     this.dataSource = this.cart.items;
   }
+
+  getTotal(items: CartItem[]): number {
+    return items
+      .map((item) => item.price * item.quantity)
+      .reduce((prev, curr) => prev + curr, 0);
+  }
 }
