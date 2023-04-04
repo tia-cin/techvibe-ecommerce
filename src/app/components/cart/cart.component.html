@@ -14,7 +14,10 @@
     <span class="font-bold mb-3">{{ getTotal(cart.items) | currency }}</span>
   </div>
   <div class="pt-3 flex justify-between">
-    <button class="bg-rose-600 text-white rounded-full w-9 h-9 p-1.5">
+    <button
+      (click)="onEmptyCart()"
+      class="bg-rose-600 text-white rounded-full w-9 h-9 p-1.5"
+    >
       <mat-icon>remove_shopping_cart</mat-icon>
     </button>
     <button
