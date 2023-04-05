@@ -7,17 +7,9 @@ import { Product } from "src/app/types";
 })
 export class CardComponent implements OnInit {
   @Input() fullWidth = false;
-  @Output() addToCart = new EventEmitter();
+  @Input() product: Product | undefined;
 
-  product: Product | undefined = {
-    id: 1,
-    name: "product name",
-    price: 100,
-    category: "smartphone",
-    details: "Et voluptate in duis nostrud quis officia anim nisi sit.",
-    image: "https://via.placeholder.com/150",
-    slug: "product-name",
-  };
+  @Output() addToCart = new EventEmitter();
 
   constructor() {}
 

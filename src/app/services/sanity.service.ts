@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Product } from "../types";
-import sanityClient from "@sanity/client";
+import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import { Observable, of } from "rxjs";
 
@@ -11,27 +11,21 @@ export class SanityService {
   data: any[] = [];
   constructor() {}
 
-  sanityClientCredentials = {
-    option: sanityClient({
-      projectId: "wrbpjeis",
-      dataset: "production",
-      useCdn: true,
-      token: process.env["TOKEN"],
-    }),
-  };
+  sanityClientCredentials = createClient({
+    projectId: "wrbpjeis",
+    useCdn: true,
+    apiVersion: "2021-08-31",
+    dataset: "production",
+    token:
+      "skH0AykEpycLIiwx0hlRTxnGsxJd7CZAQP6dcJTufja5ltlEwsukV6VMCX6U7DU6JF2ewUuvVJLffWnWL5PLRECXk0Oc88sXAGsFzBxaTXQmR27ZPPWGjfXN7aw02ZTiKF1pKTLuh2S7rs12sfFLMYdU7hZRjxcwC0Q76YuS9WFjK1tGmz2A",
+  });
 
   urlFor = (source: any) =>
-    imageUrlBuilder(this.sanityClientCredentials.option).image(source);
+    imageUrlBuilder(this.sanityClientCredentials).image(source);
 
-  async ngOnInit() {
-    const productQuery = "*[_type == 'product']";
+  getBanners() {
     const bannerQuery = "*[_type == 'banner']";
-
-    const data1 = await this.sanityClientCredentials.option.fetch(productQuery);
-    const data2 = await this.sanityClientCredentials.option.fetch(bannerQuery);
-
-    this.data = [data1, data2];
-    return this.data;
+    const fetchBanners = this.sanityClientCredentials.fetch(bannerQuery);
   }
 
   getProducts(
@@ -39,12 +33,30 @@ export class SanityService {
     sort = "desc",
     category?: string
   ): Observable<Product[]> {
-    const products = this.data
-      .slice(Number(limit))
-      .sort(() => (sort === "desc" ? 1 : -1))
-      .filter((p) => (category ? p.category === category : p));
+    if (this.data.length > 0) {
+      const filteredData = this.data
+        .slice(0, Number(limit))
+        .sort(() => (sort === "desc" ? 1 : -1))
+        .filter((p) => (category ? p.category === category : true));
+      console.log(filteredData);
+      return of(filteredData);
+    } else {
+      const productQuery = "*[_type == 'product']";
+      let res: Product[] = [];
 
-    return of(products);
+      this.sanityClientCredentials
+        .fetch<Product[]>(productQuery)
+        .then((data) => {
+          this.data = data;
+          const filteredData = data
+            .slice(0, Number(limit))
+            .sort(() => (sort === "desc" ? 1 : -1))
+            .filter((p) => (category ? p.category === category : true));
+          console.log(filteredData);
+          res = filteredData;
+        });
+      return of(res);
+    }
   }
 
   getCategories(): string[] {
