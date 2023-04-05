@@ -59,4 +59,12 @@ export class PurchaseComponent implements OnInit {
   onRemoveFromCart(item: CartItem): void {
     this.purchaseService.removeFromCart(item);
   }
+
+  onRemoveQuantity(item: CartItem): void {
+    this.purchaseService.removeQuantity(item);
+  }
+
+  onAddQuantity(item: CartItem): void {
+    this.purchaseService.addToCart(item);
+  }
 }
