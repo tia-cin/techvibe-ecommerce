@@ -2,14 +2,14 @@ import { Injectable } from "@angular/core";
 import { Product, Banner } from "../types";
 import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
-import { Observable, of } from "rxjs";
+import { Observable, of, from } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class SanityService {
   banners: Banner[] = [];
-  products: Product[] = [];
+  products: Product[] | undefined;
   constructor() {}
 
   sanityClientCredentials = createClient({
@@ -34,7 +34,7 @@ export class SanityService {
     sort = "A - Z",
     category?: string
   ): Observable<Product[]> {
-    if (this.products.length > 0) {
+    if (this.products) {
       const filteredData = this.products
         .slice(0, Number(limit))
         .sort(() => (sort === "A - Z" ? 1 : -1))
@@ -43,22 +43,22 @@ export class SanityService {
     } else {
       const productQuery = "*[_type == 'product']";
 
-      this.sanityClientCredentials
-        .fetch<Product[]>(productQuery)
-        .then((data) => {
-          this.products = data;
-          const filteredData = data
-            .slice(0, Number(limit))
-            .sort(() => (sort === "A - Z" ? 1 : -1))
-            .filter((p) => (category ? p.category === category : true));
-          this.products = filteredData;
-        });
-      console.log(this.products);
-      return of(this.products);
+      return from(
+        this.sanityClientCredentials
+          .fetch<Product[]>(productQuery)
+          .then((data) => {
+            this.products = data;
+            const filteredData = data
+              .slice(0, Number(limit))
+              .sort(() => (sort === "A - Z" ? 1 : -1))
+              .filter((p) => (category ? p.category === category : true));
+            return filteredData;
+          })
+      );
     }
   }
 
-  getCategories(): string[] {
-    return this.products.map((p: Product) => p.category);
-  }
+  // getCategories(): string[] {
+  //   return this.products?.map((p: Product) => p.category);
+  // }
 }
