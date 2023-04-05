@@ -51,4 +51,8 @@ export class PurchaseComponent implements OnInit {
       .map((item) => item.price * item.quantity)
       .reduce((prev, curr) => prev + curr, 0);
   }
+
+  onEmptyCart(): void {
+    this.purchaseService.emptyCart();
+  }
 }
