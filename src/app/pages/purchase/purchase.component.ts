@@ -40,7 +40,10 @@ export class PurchaseComponent implements OnInit {
   constructor(private purchaseService: PurchaseService) {}
 
   ngOnInit(): void {
-    this.dataSource = this.cart.items;
+    this.purchaseService.cart.subscribe((_cart: Cart) => {
+      this.cart = _cart;
+      this.dataSource = this.cart.items;
+    });
   }
 
   getTotal(items: CartItem[]): number {
