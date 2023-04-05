@@ -75,6 +75,12 @@
   </table>
 </mat-card>
 <mat-card *ngIf="!cart.items.length" class="h-screen">
-  <p>Cart is empty</p>
-  <button mat-raised-button routerLink="/home">Go Shopping</button>
+  <p class="text-center text-5xl pt-10">Your cart is empty</p>
+  <button
+    class="relative top-10 left-[650px] text-lg bg-zinc-800"
+    mat-raised-button
+    routerLink="/home"
+  >
+    Go Shopping
+  </button>
 </mat-card>
