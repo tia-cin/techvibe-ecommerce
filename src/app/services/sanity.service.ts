@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Product } from "../types";
+import { Product, Banner } from "../types";
 import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import { Observable, of } from "rxjs";
@@ -8,7 +8,8 @@ import { Observable, of } from "rxjs";
   providedIn: "root",
 })
 export class SanityService {
-  data: any[] = [];
+  banners: Banner[] = [];
+  products: Product[] = [];
   constructor() {}
 
   sanityClientCredentials = createClient({
@@ -30,36 +31,34 @@ export class SanityService {
 
   getProducts(
     limit = "12",
-    sort = "desc",
+    sort = "A - Z",
     category?: string
   ): Observable<Product[]> {
-    if (this.data.length > 0) {
-      const filteredData = this.data
+    if (this.products.length > 0) {
+      const filteredData = this.products
         .slice(0, Number(limit))
-        .sort(() => (sort === "desc" ? 1 : -1))
+        .sort(() => (sort === "A - Z" ? 1 : -1))
         .filter((p) => (category ? p.category === category : true));
-      console.log(filteredData);
       return of(filteredData);
     } else {
       const productQuery = "*[_type == 'product']";
-      let res: Product[] = [];
 
       this.sanityClientCredentials
         .fetch<Product[]>(productQuery)
         .then((data) => {
-          this.data = data;
+          this.products = data;
           const filteredData = data
             .slice(0, Number(limit))
-            .sort(() => (sort === "desc" ? 1 : -1))
+            .sort(() => (sort === "A - Z" ? 1 : -1))
             .filter((p) => (category ? p.category === category : true));
-          console.log(filteredData);
-          res = filteredData;
+          this.products = filteredData;
         });
-      return of(res);
+      console.log(this.products);
+      return of(this.products);
     }
   }
 
   getCategories(): string[] {
-    return this.data[0].map((p: Product) => p.category);
+    return this.products.map((p: Product) => p.category);
   }
 }
