@@ -27,7 +27,7 @@ export class PurchaseService {
 
   removeFromCart(item: CartItem, updateCart: boolean = true): CartItem[] {
     const filteredItems = this.cart.value.items.filter(
-      (_item) => _item.id === item.id
+      (_item) => _item.id !== item.id
     );
 
     if (updateCart) {
