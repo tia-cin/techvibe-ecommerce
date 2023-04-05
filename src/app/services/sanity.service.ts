@@ -52,6 +52,8 @@ export class SanityService {
               .slice(0, Number(limit))
               .sort(() => (sort === "A - Z" ? 1 : -1))
               .filter((p) => (category ? p.category === category : true));
+            console.log(filteredData);
+
             return filteredData;
           })
       );
