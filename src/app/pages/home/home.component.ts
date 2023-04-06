@@ -59,8 +59,4 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.productsSubcription.unsubscribe();
     }
   }
-
-  urlFor(source: any) {
-    return this.sanityService.urlFor(source);
-  }
 }
