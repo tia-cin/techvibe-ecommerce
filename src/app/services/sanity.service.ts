@@ -57,7 +57,7 @@ export class SanityService {
     category?: string
   ): Observable<Product[]> {
     if (this.products) {
-      this.products = this.products.map((p) => this.updateImageProp(p));
+      // this.products = this.products.map((p) => this.updateImageProp(p));
       const filteredData = this.filteredData(
         this.products,
         Number(limit),
@@ -73,7 +73,7 @@ export class SanityService {
           .fetch<Product[]>(productQuery)
           .then((data) => {
             console.log(data);
-            this.products = data.map((d) => this.updateImageProp(d));
+            // this.products = data.map((d) => this.updateImageProp(d));
             const filteredData = this.filteredData(
               data,
               Number(limit),

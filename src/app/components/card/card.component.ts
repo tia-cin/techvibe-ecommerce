@@ -11,6 +11,7 @@ export class CardComponent implements OnInit {
   @Input() fullWidth = false;
   @Input() product: Product | undefined;
 
+  @Output() urlFor = new EventEmitter();
   @Output() addToCart = new EventEmitter();
 
   constructor() {}
@@ -19,5 +20,9 @@ export class CardComponent implements OnInit {
 
   onAddToCart(): void {
     this.addToCart.emit(this.product);
+  }
+
+  onUrlFor(source: any) {
+    this.urlFor.emit(source && source[0]);
   }
 }

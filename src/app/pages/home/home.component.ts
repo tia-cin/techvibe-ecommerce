@@ -3,6 +3,8 @@ import { Subscription } from "rxjs";
 import { PurchaseService } from "src/app/services/purchase.service";
 import { SanityService } from "src/app/services/sanity.service";
 import { Product } from "src/app/types";
+import { ImageUrlBuilder } from "@sanity/image-url/lib/types/builder";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 const ROW_HEIGHT: { [id: number]: number } = { 1: 400, 3: 355, 4: 380 };
 
@@ -58,5 +60,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.productsSubcription) {
       this.productsSubcription.unsubscribe();
     }
+  }
+
+  urlFor(source: SanityImageSource): string {
+    return this.sanityService.urlFor(source).url();
   }
 }
