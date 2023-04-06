@@ -47,7 +47,10 @@ export class SanityService {
 
   updateImageProp(product: Product): Product {
     const { image, ...pro } = product;
-    const updated = this.urlFor(image).url();
+    console.log(image);
+
+    const updated = this.urlFor(image && image[0]).url();
+    console.log(updated);
     return { ...pro, image: updated };
   }
 
@@ -73,7 +76,9 @@ export class SanityService {
           .fetch<Product[]>(productQuery)
           .then((data) => {
             console.log(data);
-            // this.products = data.map((d) => this.updateImageProp(d));
+            this.products = data.map((d) => this.updateImageProp(d));
+            console.log(this.products);
+
             const filteredData = this.filteredData(
               data,
               Number(limit),

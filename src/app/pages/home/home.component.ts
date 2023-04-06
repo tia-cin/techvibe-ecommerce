@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  urlFor(source: SanityImageSource): string {
-    return this.sanityService.urlFor(source).url();
-  }
+  // urlFor(source: SanityImageSource): string {
+  //   return this.sanityService.urlFor(source).url();
+  // }
 }
