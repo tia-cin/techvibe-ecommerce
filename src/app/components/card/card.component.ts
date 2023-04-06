@@ -9,6 +9,7 @@ export class CardComponent implements OnInit {
   @Input() fullWidth = false;
   @Input() product: Product | undefined;
 
+  @Output() urlFor = new EventEmitter();
   @Output() addToCart = new EventEmitter();
 
   constructor() {}

@@ -3,6 +3,8 @@ import { Product, Banner } from "../types";
 import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import { Observable, of, from } from "rxjs";
+import { ImageUrlBuilder } from "@sanity/image-url/lib/types/builder";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 @Injectable({
   providedIn: "root",
@@ -21,8 +23,9 @@ export class SanityService {
       "skH0AykEpycLIiwx0hlRTxnGsxJd7CZAQP6dcJTufja5ltlEwsukV6VMCX6U7DU6JF2ewUuvVJLffWnWL5PLRECXk0Oc88sXAGsFzBxaTXQmR27ZPPWGjfXN7aw02ZTiKF1pKTLuh2S7rs12sfFLMYdU7hZRjxcwC0Q76YuS9WFjK1tGmz2A",
   });
 
-  urlFor = (source: any) =>
-    imageUrlBuilder(this.sanityClientCredentials).image(source);
+  urlFor(source: SanityImageSource): ImageUrlBuilder {
+    return imageUrlBuilder(this.sanityClientCredentials).image(source);
+  }
 
   getBanners() {
     const bannerQuery = "*[_type == 'banner']";

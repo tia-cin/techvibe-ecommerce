@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   onAddToCart(product: Product): void {
     this.cartService.addToCart({
       id: product.id,
-      image: product.image[0],
+      image: this.sanityService.urlFor(product.image[0]),
       name: product.name,
       price: product.price,
       quantity: 1,
@@ -58,5 +58,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.productsSubcription) {
       this.productsSubcription.unsubscribe();
     }
+  }
+
+  urlFor(source: any) {
+    return this.sanityService.urlFor(source);
   }
 }
