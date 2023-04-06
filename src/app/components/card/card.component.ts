@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 import { Product } from "src/app/types";
-import { ImageUrlBuilder } from "@sanity/image-url/lib/types/builder";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 @Component({
   selector: "app-card",
@@ -11,7 +9,6 @@ export class CardComponent implements OnInit {
   @Input() fullWidth = false;
   @Input() product: Product | undefined;
 
-  // @Output() urlFor = new EventEmitter();
   @Output() addToCart = new EventEmitter();
 
   constructor() {}
@@ -21,8 +18,4 @@ export class CardComponent implements OnInit {
   onAddToCart(): void {
     this.addToCart.emit(this.product);
   }
-
-  // onUrlFor(source: any) {
-  //   return this.urlFor.emit(source && source[0]);
-  // }
 }

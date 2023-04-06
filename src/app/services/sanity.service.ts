@@ -46,11 +46,9 @@ export class SanityService {
   }
 
   updateImageProp(product: Product): Product {
-    const { image, ...pro } = product;
-    console.log(image);
-
-    const updated = this.urlFor(image && image[0]).url();
-    console.log(updated);
+    let { image, ...pro } = product;
+    image = Array.isArray(image) ? image[0] : image;
+    const updated = this.urlFor(image).url();
     return { ...pro, image: updated };
   }
 
@@ -60,7 +58,7 @@ export class SanityService {
     category?: string
   ): Observable<Product[]> {
     if (this.products) {
-      // this.products = this.products.map((p) => this.updateImageProp(p));
+      this.products = this.products.map((p) => this.updateImageProp(p));
       const filteredData = this.filteredData(
         this.products,
         Number(limit),
@@ -75,18 +73,13 @@ export class SanityService {
         this.sanityClientCredentials
           .fetch<Product[]>(productQuery)
           .then((data) => {
-            console.log(data);
             this.products = data.map((d) => this.updateImageProp(d));
-            console.log(this.products);
-
             const filteredData = this.filteredData(
-              data,
+              this.products,
               Number(limit),
               sort,
               category
             );
-            console.log(filteredData);
-
             return filteredData;
           })
       );
