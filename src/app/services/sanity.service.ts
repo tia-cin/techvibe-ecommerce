@@ -12,8 +12,6 @@ import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 export class SanityService {
   banners: Banner[] = [];
   products: Product[] | undefined;
-  constructor() {}
-
   sanityClientCredentials = createClient({
     projectId: "wrbpjeis",
     useCdn: true,
@@ -22,9 +20,12 @@ export class SanityService {
     token:
       "skH0AykEpycLIiwx0hlRTxnGsxJd7CZAQP6dcJTufja5ltlEwsukV6VMCX6U7DU6JF2ewUuvVJLffWnWL5PLRECXk0Oc88sXAGsFzBxaTXQmR27ZPPWGjfXN7aw02ZTiKF1pKTLuh2S7rs12sfFLMYdU7hZRjxcwC0Q76YuS9WFjK1tGmz2A",
   });
+  builder = imageUrlBuilder(this.sanityClientCredentials);
+
+  constructor() {}
 
   urlFor(source: SanityImageSource): ImageUrlBuilder {
-    return imageUrlBuilder(this.sanityClientCredentials).image(source);
+    return this.builder.image(source);
   }
 
   getBanners() {
@@ -46,7 +47,7 @@ export class SanityService {
 
   updateImageProp(product: Product): Product {
     const { image, ...pro } = product;
-    const updated = String(this.urlFor(image && image[0]));
+    const updated = this.urlFor(image).url();
     return { ...pro, image: updated };
   }
 
@@ -56,11 +57,7 @@ export class SanityService {
     category?: string
   ): Observable<Product[]> {
     if (this.products) {
-      const allProducts = this.products.map((p) =>
-        this.urlFor(p.image && p.image[0])
-      );
-      console.log(allProducts);
-
+      this.products = this.products.map((p) => this.updateImageProp(p));
       const filteredData = this.filteredData(
         this.products,
         Number(limit),
@@ -75,8 +72,8 @@ export class SanityService {
         this.sanityClientCredentials
           .fetch<Product[]>(productQuery)
           .then((data) => {
+            console.log(data);
             this.products = data.map((d) => this.updateImageProp(d));
-
             const filteredData = this.filteredData(
               data,
               Number(limit),
