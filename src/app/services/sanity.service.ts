@@ -32,16 +32,41 @@ export class SanityService {
     const fetchBanners = this.sanityClientCredentials.fetch(bannerQuery);
   }
 
+  filteredData(
+    data: Product[],
+    limit: number,
+    sort: string,
+    category?: string
+  ) {
+    return data
+      .slice(0, limit)
+      .sort(() => (sort === "A - Z" ? 1 : -1))
+      .filter((p) => (category ? p.category === category : true));
+  }
+
+  updateImageProp(product: Product): Product {
+    const { image, ...pro } = product;
+    const updated = String(this.urlFor(image && image[0]));
+    return { ...pro, image: updated };
+  }
+
   getProducts(
     limit = "12",
     sort = "A - Z",
     category?: string
   ): Observable<Product[]> {
     if (this.products) {
-      const filteredData = this.products
-        .slice(0, Number(limit))
-        .sort(() => (sort === "A - Z" ? 1 : -1))
-        .filter((p) => (category ? p.category === category : true));
+      const allProducts = this.products.map((p) =>
+        this.urlFor(p.image && p.image[0])
+      );
+      console.log(allProducts);
+
+      const filteredData = this.filteredData(
+        this.products,
+        Number(limit),
+        sort,
+        category
+      );
       return of(filteredData);
     } else {
       const productQuery = "*[_type == 'product']";
@@ -50,11 +75,14 @@ export class SanityService {
         this.sanityClientCredentials
           .fetch<Product[]>(productQuery)
           .then((data) => {
-            this.products = data;
-            const filteredData = data
-              .slice(0, Number(limit))
-              .sort(() => (sort === "A - Z" ? 1 : -1))
-              .filter((p) => (category ? p.category === category : true));
+            this.products = data.map((d) => this.updateImageProp(d));
+
+            const filteredData = this.filteredData(
+              data,
+              Number(limit),
+              sort,
+              category
+            );
             console.log(filteredData);
 
             return filteredData;
