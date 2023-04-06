@@ -19,4 +19,8 @@ export class CardComponent implements OnInit {
   onAddToCart(): void {
     this.addToCart.emit(this.product);
   }
+
+  onUrlFor(source: any) {
+    return this.urlFor.emit(source);
+  }
 }
