@@ -28,9 +28,17 @@ export class SanityService {
     return this.builder.image(source);
   }
 
-  getBanners() {
-    const bannerQuery = "*[_type == 'banner']";
-    const fetchBanners = this.sanityClientCredentials.fetch(bannerQuery);
+  async getBanners(): Promise<Banner[]> {
+    if (this.banners) {
+      this.banners = this.banners.map((b) => this.updateImageProp(b));
+      return this.banners;
+    } else {
+      const bannerQuery = "*[_type == 'banner']";
+      const fetchBanners = await this.sanityClientCredentials.fetch<Banner[]>(
+        bannerQuery
+      );
+      return fetchBanners;
+    }
   }
 
   filteredData(
@@ -45,8 +53,8 @@ export class SanityService {
       .filter((p) => (category ? p.category === category : true));
   }
 
-  updateImageProp(product: Product): Product {
-    let { image, ...pro } = product;
+  updateImageProp(item: any): any {
+    let { image, ...pro } = item;
     image = Array.isArray(image) ? image[0] : image;
     const updated = this.urlFor(image).url();
     return { ...pro, image: updated };
