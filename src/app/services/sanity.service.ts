@@ -30,19 +30,13 @@ export class SanityService {
 
   getBanners(): Observable<Banner[]> {
     if (this.banners) {
-      this.banners = this.banners.map((p) => this.updateImageProp(p));
-
-      return of(this.banners);
+      return of(this.banners.map((p) => this.updateImageProp(p)));
     } else {
       const bannerQuery = "*[_type == 'banner']";
       return from(
         this.sanityClientCredentials
           .fetch<Banner[]>(bannerQuery)
-          .then((data) => {
-            this.banners = data.map((d) => this.updateImageProp(d));
-
-            return this.banners;
-          })
+          .then((data) => data.map((d) => this.updateImageProp(d)))
       );
     }
   }
