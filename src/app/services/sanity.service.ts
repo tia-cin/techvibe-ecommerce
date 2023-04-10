@@ -10,7 +10,7 @@ import { SanityImageSource } from "@sanity/image-url/lib/types/types";
   providedIn: "root",
 })
 export class SanityService {
-  banners: Banner[] = [];
+  banners: Banner[] | undefined;
   products: Product[] | undefined;
   sanityClientCredentials = createClient({
     projectId: "wrbpjeis",
@@ -28,16 +28,15 @@ export class SanityService {
     return this.builder.image(source);
   }
 
-  getBanners(): Observable<Banner[]> {
+  async getBanners(): Promise<any> {
     if (this.banners) {
-      return of(this.banners.map((p) => this.updateImageProp(p)));
+      return this.banners.map((p) => this.updateImageProp(p));
     } else {
       const bannerQuery = "*[_type == 'banner']";
-      return from(
-        this.sanityClientCredentials
-          .fetch<Banner[]>(bannerQuery)
-          .then((data) => data.map((d) => this.updateImageProp(d)))
+      const bannerFetch = await this.sanityClientCredentials.fetch<Banner[]>(
+        bannerQuery
       );
+      return bannerFetch;
     }
   }
 

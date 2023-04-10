@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   sort = "A - Z";
   count = "12";
   productsSubcription: Subscription | undefined;
-  bannersSubcription: Subscription | undefined;
 
   constructor(
     private cartService: PurchaseService,
@@ -39,13 +38,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
   }
 
-  getBanners() {
-    this.bannersSubcription = this.sanityService
-      .getBanners()
-      .subscribe((_banners) => {
-        this.banners = _banners;
-        console.log(_banners);
-      });
+  async getBanners() {
+    this.banners = await this.sanityService.getBanners();
   }
 
   colsChange(cols: number): void {
