@@ -28,7 +28,7 @@ export class SanityService {
     return this.builder.image(source);
   }
 
-  async getBanners(): Promise<any> {
+  async getBanners(): Promise<Banner[]> {
     if (this.banners) {
       return this.banners.map((p) => this.updateImageProp(p));
     } else {
@@ -36,7 +36,7 @@ export class SanityService {
       const bannerFetch = await this.sanityClientCredentials.fetch<Banner[]>(
         bannerQuery
       );
-      return bannerFetch;
+      return bannerFetch.map((b) => this.updateImageProp(b));
     }
   }
 

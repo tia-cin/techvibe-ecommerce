@@ -17,6 +17,10 @@
         <button type="button">{{ banner.buttonText }}</button>
       </a>
     </div>
-    <img src="" alt="" class="-top-1/4 left-1/4 absolute" />
+    <img
+      [src]="banner.image"
+      [alt]="banner.product"
+      class="top-1/4 left-1/4 absolute w-[50px]"
+    />
   </div>
 </div>
