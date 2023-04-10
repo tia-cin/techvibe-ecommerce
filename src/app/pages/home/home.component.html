@@ -1,5 +1,5 @@
 <main class="bg-neutral-800">
-  <app-header-banner></app-header-banner>
+  <app-header-banner *ngIf="banners" [banner]="banners[0]"></app-header-banner>
   <mat-drawer-container [autosize]="true" class="w-full">
     <mat-drawer mode="side" opened class="p-8">
       <app-filters (currentCategory)="currentCategory($event)"></app-filters>
@@ -19,5 +19,5 @@
       </mat-grid-list>
     </mat-drawer-content>
   </mat-drawer-container>
-  <app-footer-banner></app-footer-banner>
+  <app-footer-banner *ngIf="banners" [banner]="banners[1]"></app-footer-banner>
 </main>

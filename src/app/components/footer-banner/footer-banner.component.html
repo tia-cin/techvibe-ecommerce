@@ -1,19 +1,20 @@
 <div
+  *ngIf="banner"
   class="pt-24 px-10 bg-indigo-600 rounded-2xl relative h-[400px] text-white w-full"
 >
   <div class="flex justify-between">
     <div class="left">
-      <p class="m-4.5">discount</p>
-      <h3 class="font-extrabold text-7xl">largeText1</h3>
-      <h3 class="font-extrabold text-7xl">largeText2</h3>
-      <p class="m-4.5">saleTime</p>
+      <p class="m-4.5">{{ banner.discount }}</p>
+      <h3 class="font-extrabold text-7xl">{{ banner.largeText1 }}</h3>
+      <h3 class="font-extrabold text-7xl">{{ banner.largeText2 }}</h3>
+      <p class="m-4.5">{{ banner.saleTime }}</p>
     </div>
     <div class="right">
-      <p class="text-lg">smallText</p>
-      <h3 class="font-extrabold text-7xl">midText</h3>
-      <p class="text-lg">desc</p>
+      <p class="text-lg">{{ banner.smallText }}</p>
+      <h3 class="font-extrabold text-7xl">{{ banner.midText }}</h3>
+      <p class="text-lg">{{ banner.desc }}</p>
       <a href="#">
-        <button type="button">buttonText</button>
+        <button type="button">{{ banner.buttonText }}</button>
       </a>
     </div>
     <img src="" alt="" class="-top-1/4 left-1/4 absolute" />
