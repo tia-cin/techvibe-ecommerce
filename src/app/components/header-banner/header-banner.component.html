@@ -2,30 +2,30 @@
   class="px-24 py-10 bg-gray-400 rounded-3xl text-xl relative h-500 w-full"
   *ngIf="banner"
 >
-  <div>
+  <div class="left-0">
     <p class="text-xl">{{ banner.smallText }}</p>
-    <h3 class="text-6xl mt-1">{{ banner.midText }}</h3>
-    <h1 class="text-white text-9xl -ml-5 uppercase">{{ banner.largeText1 }}</h1>
-    <img
-      class="relative left-60 -top-40 w-[100px]"
-      src=""
-      alt="smart-watch-4"
-    />
-    <div>
-      <a href="#">
-        <button
-          class="rounded-2xl px-2.5 py-4 bg-indigo-600 text-white mt-10 text-lg font-medium cursor-pointer"
-          style="z-index: 10000"
-        >
-          {{ banner.buttonText }}
-        </button>
-      </a>
-      <div class="absolute right-3 bottom-1 w-[300px] flex flex-col">
-        <h5 class="mb-3 font-bold text-base self-end text-indigo-600">
-          Description
-        </h5>
-        <p class="font-base text-end text-gray-600">{{ banner.desc }}</p>
-      </div>
+    <p class="text-3xl mt-1">{{ banner.midText }}</p>
+    <p class="text-white text-6xl -ml-5 uppercase">{{ banner.largeText1 }}</p>
+  </div>
+  <img
+    class="absolute left-1/2 top-5 w-[250px]"
+    [src]="banner.image"
+    [alt]="banner.product"
+  />
+  <div class="right-0">
+    <a href="#">
+      <button
+        class="rounded-2xl px-2.5 py-4 bg-indigo-600 text-white mt-10 text-lg font-medium cursor-pointer"
+        style="z-index: 10000"
+      >
+        {{ banner.buttonText }}
+      </button>
+    </a>
+    <div class="absolute right-3 bottom-1 w-[300px] flex flex-col">
+      <p class="mb-3 font-bold text-base self-end text-indigo-600">
+        Description
+      </p>
+      <p class="font-base text-end text-gray-600">{{ banner.desc }}</p>
     </div>
   </div>
 </div>
