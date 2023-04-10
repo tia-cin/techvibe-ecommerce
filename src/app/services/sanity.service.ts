@@ -34,10 +34,10 @@ export class SanityService {
       return this.banners;
     } else {
       const bannerQuery = "*[_type == 'banner']";
-      const fetchBanners = await this.sanityClientCredentials.fetch<Banner[]>(
+      const bannersFetch = await this.sanityClientCredentials.fetch<Banner[]>(
         bannerQuery
       );
-      return fetchBanners;
+      return bannersFetch.map((b) => this.updateImageProp(b));
     }
   }
 

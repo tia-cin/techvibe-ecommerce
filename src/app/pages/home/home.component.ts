@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
 import { PurchaseService } from "src/app/services/purchase.service";
 import { SanityService } from "src/app/services/sanity.service";
-import { Product } from "src/app/types";
+import { Banner, Product } from "src/app/types";
 
 const ROW_HEIGHT: { [id: number]: number } = { 1: 400, 3: 355, 4: 380 };
 
@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   rowHeight: number = ROW_HEIGHT[this.cols];
   category: string | undefined;
   products: Product[] | undefined;
+  banners: Banner[] | undefined;
   sort = "A - Z";
   count = "12";
   productsSubcription: Subscription | undefined;
@@ -26,6 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getProducts();
+    this.getBanners();
   }
 
   getProducts(): void {
@@ -34,6 +36,11 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe((_products) => {
         this.products = _products;
       });
+  }
+
+  async getBanners() {
+    this.banners = await this.sanityService.getBanners();
+    console.log(this.banners);
   }
 
   colsChange(cols: number): void {
