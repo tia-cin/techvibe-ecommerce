@@ -28,16 +28,22 @@ export class SanityService {
     return this.builder.image(source);
   }
 
-  async getBanners(): Promise<Banner[]> {
+  getBanners(): Observable<Banner[]> {
     if (this.banners) {
-      this.banners = this.banners.map((b) => this.updateImageProp(b));
-      return this.banners;
+      this.banners = this.banners.map((p) => this.updateImageProp(p));
+
+      return of(this.banners);
     } else {
       const bannerQuery = "*[_type == 'banner']";
-      const bannersFetch = await this.sanityClientCredentials.fetch<Banner[]>(
-        bannerQuery
+      return from(
+        this.sanityClientCredentials
+          .fetch<Banner[]>(bannerQuery)
+          .then((data) => {
+            this.banners = data.map((d) => this.updateImageProp(d));
+
+            return this.banners;
+          })
       );
-      return bannersFetch.map((b) => this.updateImageProp(b));
     }
   }
 
