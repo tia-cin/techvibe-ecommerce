@@ -1,19 +1,24 @@
 <mat-card *ngIf="product" [ngClass]="{ 'text-center': !fullWidth }">
   <div [ngClass]="{ flex: fullWidth }">
-    <img
-      [src]="product.image"
-      alt="product.slug.current"
-      class="mb-1 mx-auto h-[200px]"
-      [ngClass]="{ 'h-[200px]': !fullWidth, 'h-[320px]': fullWidth }"
-    />
+    <div
+      class="bg-white rounded p-2 mb-2"
+      [ngClass]="{ 'w-full': !fullWidth, 'w-[600px]': fullWidth }"
+    >
+      <img
+        [src]="product.image"
+        alt="product.slug.current"
+        class="mb-1 mx-auto h-[200px]"
+        [ngClass]="{ 'h-[200px]': !fullWidth, 'h-[320px]': fullWidth }"
+      />
+    </div>
     <div
       class="w-full"
       [ngClass]="{ 'px-8 flex flex-col justify-between': fullWidth }"
     >
       <div>
         <h3>{{ product.name }}</h3>
-        <span class="text-sm">New Arrival</span>
-        <p class="truncate hover:whitespace-normal" *ngIf="fullWidth">
+        <span class="text-sm capitalize">{{ product.category }}</span>
+        <p *ngIf="fullWidth">
           {{ product.details }}
         </p>
       </div>
