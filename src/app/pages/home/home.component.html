@@ -5,15 +5,24 @@
       <app-filters (currentCategory)="currentCategory($event)"></app-filters>
     </mat-drawer>
     <mat-drawer-content class="p-6">
-      <app-products-header (colsChange)="colsChange($event)">
+      <app-products-header
+        (colsChange)="colsChange($event)"
+        (curentCount)="onCurrentCount($event)"
+        (currentSort)="onCurrentSort($event)"
+      >
       </app-products-header>
-      <mat-grid-list gutterSize="16" [cols]="cols" [rowHeight]="rowHeight">
+      <mat-grid-list
+        gutterSize="16"
+        [cols]="cols"
+        [rowHeight]="rowHeight"
+        *ngIf="products && products.length"
+      >
         <mat-grid-tile *ngFor="let product of products">
           <app-card
-            [product]="product"
             (addToCart)="onAddToCart($event)"
-            class="w-full"
+            [product]="product"
             [fullWidth]="cols === 1"
+            class="w-full"
           ></app-card>
         </mat-grid-tile>
       </mat-grid-list>
