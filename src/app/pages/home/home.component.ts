@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   colsChange(cols: number): void {
     this.cols = cols;
+    this.rowHeight = ROW_HEIGHT[cols];
   }
 
   currentCategory(categ: string): void {
