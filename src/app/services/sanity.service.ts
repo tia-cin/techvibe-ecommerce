@@ -48,7 +48,11 @@ export class SanityService {
   ) {
     return data
       .slice(0, limit)
-      .sort(() => (sort === "A - Z" ? 1 : -1))
+      .sort((a, b) =>
+        sort === "A - Z"
+          ? a.name.localeCompare(b.name)
+          : b.name.localeCompare(a.name)
+      )
       .filter((p) => (category ? p.category === category : true));
   }
 

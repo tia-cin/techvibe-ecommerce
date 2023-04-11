@@ -12,7 +12,7 @@ import { SanityService } from "src/app/services/sanity.service";
   selector: "app-filters",
   templateUrl: "./filters.component.html",
 })
-export class FiltersComponent implements OnInit {
+export class FiltersComponent implements OnInit, OnDestroy {
   @Output() currentCategory = new EventEmitter<string>();
 
   categories: string[] | undefined;
@@ -25,7 +25,6 @@ export class FiltersComponent implements OnInit {
       .getCategories()
       .subscribe((res: string[]) => {
         this.categories = res;
-        console.log(this.categories);
       });
   }
 
