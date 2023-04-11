@@ -60,7 +60,7 @@ export class SanityService {
   }
 
   getProducts(
-    limit = "12",
+    limit = "6",
     sort = "A - Z",
     category?: string
   ): Observable<Product[]> {

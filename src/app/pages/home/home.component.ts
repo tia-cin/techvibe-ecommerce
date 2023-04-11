@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   products: Product[] | undefined;
   banners: Banner[] | undefined;
   sort = "A - Z";
-  count = "12";
+  count = "6";
   productsSubcription: Subscription | undefined;
 
   constructor(

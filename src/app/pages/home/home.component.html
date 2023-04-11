@@ -7,8 +7,8 @@
     <mat-drawer-content class="p-6">
       <app-products-header
         (colsChange)="colsChange($event)"
-        (curentCount)="onCurrentCount($event)"
-        (currentSort)="onCurrentSort($event)"
+        (onCurrentCount)="currentCount($event)"
+        (onCurrentSort)="currentSort($event)"
       >
       </app-products-header>
       <mat-grid-list

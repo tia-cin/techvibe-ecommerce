@@ -6,6 +6,8 @@ import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 })
 export class ProductsHeaderComponent implements OnInit {
   @Output() colsChange = new EventEmitter<number>();
+  @Output() onCurrentSort = new EventEmitter<string>();
+  @Output() onCurrentCount = new EventEmitter<number>();
 
   sort = "A - Z";
   itemsCount = 6;
@@ -15,10 +17,12 @@ export class ProductsHeaderComponent implements OnInit {
   ngOnInit(): void {}
 
   onSortUpdated(sortBy: string): void {
+    this.onCurrentSort.emit(sortBy);
     this.sort = sortBy;
   }
 
   onItemsDisplayed(items: number): void {
+    this.onCurrentCount.emit(items);
     this.itemsCount = items;
   }
 
