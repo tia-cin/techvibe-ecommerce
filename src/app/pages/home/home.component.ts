@@ -57,6 +57,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getProducts();
   }
 
+  currentCount(count: number): void {
+    this.count = count.toString();
+    this.getProducts();
+  }
+
   onAddToCart(product: Product): void {
     this.cartService.addToCart({
       id: product.id,
