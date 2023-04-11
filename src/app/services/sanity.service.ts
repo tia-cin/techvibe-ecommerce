@@ -93,7 +93,13 @@ export class SanityService {
     }
   }
 
-  // getCategories(): string[] {
-  //   return this.products?.map((p: Product) => p.category);
-  // }
+  getCategories(): Observable<string[]> {
+    const productQuery = "*[_type == 'product']";
+
+    return from(
+      this.sanityClientCredentials
+        .fetch<Product[]>(productQuery)
+        .then((data) => data.map((d: Product) => d.category))
+    );
+  }
 }

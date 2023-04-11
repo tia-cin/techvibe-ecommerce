@@ -1,4 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  OnDestroy,
+} from "@angular/core";
+import { Subscription } from "rxjs";
+import { SanityService } from "src/app/services/sanity.service";
 
 @Component({
   selector: "app-filters",
@@ -7,13 +15,20 @@ import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 export class FiltersComponent implements OnInit {
   @Output() currentCategory = new EventEmitter<string>();
 
-  categories = ["earphones", "smartphones", "headphones", "smartwatches"];
+  categories: string[] | undefined;
+  categoriesSubscription: Subscription | undefined;
 
-  constructor() {}
+  constructor(private sanityService: SanityService) {}
 
   ngOnInit(): void {}
 
   onCurrentCategory(categ: string): void {
-    this.currentCategory.emit(categ);
+    this.currentCategory.next(categ);
+  }
+
+  ngOnDestroy(): void {
+    if (this.categoriesSubscription) {
+      this.categoriesSubscription.unsubscribe();
+    }
   }
 }
