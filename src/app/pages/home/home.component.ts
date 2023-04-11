@@ -49,6 +49,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   currentCategory(categ: string): void {
     this.category = categ;
+    this.getProducts();
+  }
+
+  currentSort(sort: string): void {
+    this.sort = sort;
+    this.getProducts();
   }
 
   onAddToCart(product: Product): void {
