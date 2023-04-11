@@ -20,7 +20,14 @@ export class FiltersComponent implements OnInit {
 
   constructor(private sanityService: SanityService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.categoriesSubscription = this.sanityService
+      .getCategories()
+      .subscribe((res: string[]) => {
+        this.categories = res;
+        console.log(this.categories);
+      });
+  }
 
   onCurrentCategory(categ: string): void {
     this.currentCategory.next(categ);

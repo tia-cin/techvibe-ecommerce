@@ -99,7 +99,14 @@ export class SanityService {
     return from(
       this.sanityClientCredentials
         .fetch<Product[]>(productQuery)
-        .then((data) => data.map((d: Product) => d.category))
+        .then((data) =>
+          data
+            .map((d: Product) => d.category)
+            .filter(
+              (category, index, categories) =>
+                categories.indexOf(category) === index
+            )
+        )
     );
   }
 }
