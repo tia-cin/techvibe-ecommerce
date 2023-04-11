@@ -53,7 +53,7 @@ export class SanityService {
           ? a.name.localeCompare(b.name)
           : b.name.localeCompare(a.name)
       )
-      .filter((p) => (category ? p.category === category : true));
+      .filter((p) => (category ? p.category === category : p));
   }
 
   updateImageProp(item: any): any {

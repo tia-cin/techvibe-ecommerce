@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   getProducts(): void {
     this.productsSubcription = this.sanityService
-      .getProducts(this.count, this.sort)
+      .getProducts(this.count, this.sort, this.category)
       .subscribe((_products) => {
         this.products = _products;
       });
