@@ -32,9 +32,8 @@ export class SanityService {
     if (this.banners) {
       return this.banners.map((p) => this.updateImageProp(p));
     } else {
-      const bannerQuery = "*[_type == 'banner']";
       const bannerFetch = await this.sanityClientCredentials.fetch<Banner[]>(
-        bannerQuery
+        "*[_type == 'banner']"
       );
       return bannerFetch.map((b) => this.updateImageProp(b));
     }
@@ -58,9 +57,10 @@ export class SanityService {
 
   updateImageProp(item: any): any {
     let { image, ...pro } = item;
-    image = Array.isArray(image) ? image[0] : image;
-    const updated = this.urlFor(image).url();
-    return { ...pro, image: updated };
+    return {
+      ...pro,
+      image: this.urlFor(Array.isArray(image) ? image[0] : image).url(),
+    };
   }
 
   getProducts(
@@ -69,20 +69,18 @@ export class SanityService {
     category?: string
   ): Observable<Product[]> {
     if (this.products) {
-      this.products = this.products.map((p) => this.updateImageProp(p));
-      const filteredData = this.filteredData(
-        this.products,
-        Number(limit),
-        sort,
-        category
+      return of(
+        this.filteredData(
+          this.products.map((p) => this.updateImageProp(p)),
+          Number(limit),
+          sort,
+          category
+        )
       );
-      return of(filteredData);
     } else {
-      const productQuery = "*[_type == 'product']";
-
       return from(
         this.sanityClientCredentials
-          .fetch<Product[]>(productQuery)
+          .fetch<Product[]>("*[_type == 'product']")
           .then((data) => {
             this.products = data.map((d) => this.updateImageProp(d));
             const filteredData = this.filteredData(
@@ -98,11 +96,9 @@ export class SanityService {
   }
 
   getCategories(): Observable<string[]> {
-    const productQuery = "*[_type == 'product']";
-
     return from(
       this.sanityClientCredentials
-        .fetch<Product[]>(productQuery)
+        .fetch<Product[]>("*[_type == 'product']")
         .then((data) =>
           data
             .map((d: Product) => d.category)
