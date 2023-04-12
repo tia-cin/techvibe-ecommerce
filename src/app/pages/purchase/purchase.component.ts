@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { PurchaseService } from "src/app/services/purchase.service";
 import { Cart, CartItem } from "src/app/types";
 import { Subscription } from "rxjs";
+import { loadStripe } from "@stripe/stripe-js";
 
 @Component({
   selector: "app-purchase",
@@ -37,7 +38,10 @@ export class PurchaseComponent implements OnInit {
     "total",
     "action",
   ];
-  constructor(private purchaseService: PurchaseService) {}
+  constructor(
+    private purchaseService: PurchaseService,
+    private client: HttpClient
+  ) {}
 
   ngOnInit(): void {
     this.purchaseService.cart.subscribe((_cart: Cart) => {
@@ -66,5 +70,18 @@ export class PurchaseComponent implements OnInit {
 
   onAddQuantity(item: CartItem): void {
     this.purchaseService.addToCart(item);
+  }
+
+  onCheckout(): void {
+    this.client
+      .post("http://localhost:4201/checkout", { items: this.cart.items })
+      .subscribe(async (res: any) => {
+        let stripe = await loadStripe(
+          "pk_test_51LqFYzENi5vsUdl1S6DlnTj64Jppk67ktJiaASMWUwXgYyEGgZxtHtcdvDINlnNK537BxkTeoacuedDo8Hjpe8X600jUwt0g3d"
+        );
+        stripe?.redirectToCheckout({
+          sessionId: res.id,
+        });
+      });
   }
 }
