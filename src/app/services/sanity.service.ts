@@ -69,14 +69,8 @@ export class SanityService {
     category?: string
   ): Observable<Product[]> {
     if (this.products) {
-      return of(
-        this.filteredData(
-          this.products.map((p) => this.updateImageProp(p)),
-          Number(limit),
-          sort,
-          category
-        )
-      );
+      const data = this.products.map((p) => this.updateImageProp(p));
+      return of(this.filteredData(data, Number(limit), sort, category));
     } else {
       return from(
         this.sanityClientCredentials
