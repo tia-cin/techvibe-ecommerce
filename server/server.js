@@ -84,4 +84,4 @@ app.post("/checkout", async (req, res, next) => {
   }
 });
 
-app.listen(4201, () => console.log("app is running on 4201"));
+app.listen(4201, () => console.log("Server is running on 4201"));

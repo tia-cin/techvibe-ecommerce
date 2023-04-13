@@ -56,16 +56,16 @@ export class PurchaseComponent implements OnInit, OnDestroy {
   }
 
   onCheckout(): void {
-    // this.client
-    //   .post("http://localhost:4201/checkout", { items: this.cart.items })
-    //   .subscribe(async (res: any) => {
-    //     let stripe = await loadStripe(
-    //       "pk_test_51LqFYzENi5vsUdl1S6DlnTj64Jppk67ktJiaASMWUwXgYyEGgZxtHtcdvDINlnNK537BxkTeoacuedDo8Hjpe8X600jUwt0g3d"
-    //     );
-    //     stripe?.redirectToCheckout({
-    //       sessionId: res.id,
-    //     });
-    //   });
+    this.client
+      .post("http://localhost:4201/checkout", { items: this.cart.items })
+      .subscribe(async (res: any) => {
+        let stripe = await loadStripe(
+          "pk_test_51LqFYzENi5vsUdl1S6DlnTj64Jppk67ktJiaASMWUwXgYyEGgZxtHtcdvDINlnNK537BxkTeoacuedDo8Hjpe8X600jUwt0g3d"
+        );
+        stripe?.redirectToCheckout({
+          sessionId: res.id,
+        });
+      });
   }
 
   ngOnDestroy(): void {
