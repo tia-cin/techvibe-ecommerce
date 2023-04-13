@@ -32,6 +32,7 @@ import { FooterComponent } from "./components/footer/footer.component";
 
 import { PurchaseService } from "./services/purchase.service";
 import { SanityService } from "./services/sanity.service";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { SanityService } from "./services/sanity.service";
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSidenavModule,
