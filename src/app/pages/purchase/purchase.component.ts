@@ -9,25 +9,8 @@ import { loadStripe } from "@stripe/stripe-js";
   selector: "app-purchase",
   templateUrl: "./purchase.component.html",
 })
-export class PurchaseComponent implements OnInit {
-  cart: Cart = {
-    items: [
-      {
-        image: "https://via.placeholder.com/150",
-        name: "product test",
-        price: 120,
-        id: 1,
-        quantity: 2,
-      },
-      {
-        image: "https://via.placeholder.com/150",
-        name: "product test",
-        price: 100,
-        id: 2,
-        quantity: 2,
-      },
-    ],
-  };
+export class PurchaseComponent implements OnInit, OnDestroy {
+  cart: Cart = { items: [] };
   dataSource: CartItem[] = [];
   cartSubscription: undefined | Subscription;
   currCols: string[] = [
@@ -83,5 +66,11 @@ export class PurchaseComponent implements OnInit {
     //       sessionId: res.id,
     //     });
     //   });
+  }
+
+  ngOnDestroy(): void {
+    if (this.cartSubscription) {
+      this.cartSubscription.unsubscribe();
+    }
   }
 }
