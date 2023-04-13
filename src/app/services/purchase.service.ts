@@ -13,7 +13,7 @@ export class PurchaseService {
 
   addToCart(item: CartItem): void {
     const items = [...this.cart.value.items];
-    const currItem = items.find((_item) => _item.id === item.id);
+    const currItem = items.find((_item) => _item.name === item.name);
 
     if (currItem) {
       currItem.quantity += 1;
