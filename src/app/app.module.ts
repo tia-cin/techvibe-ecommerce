@@ -33,6 +33,7 @@ import { FooterComponent } from "./components/footer/footer.component";
 import { PurchaseService } from "./services/purchase.service";
 import { SanityService } from "./services/sanity.service";
 import { HttpClientModule } from "@angular/common/http";
+import { DetailComponent } from './pages/detail/detail.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { HttpClientModule } from "@angular/common/http";
     HeaderBannerComponent,
     FooterBannerComponent,
     FooterComponent,
+    DetailComponent,
   ],
   imports: [
     BrowserModule,
