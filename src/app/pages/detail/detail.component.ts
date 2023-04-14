@@ -19,10 +19,24 @@ export class DetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getCurrentPath();
+    if (this.slug) {
+      this.getProduct(this.slug);
+    }
+  }
+
+  getCurrentPath(): void {
     this.router.url.subscribe((segments) => {
       this.slug = segments[1].path;
     });
   }
 
-  getProduct(slug: string): void {}
+  getProduct(slug: string): void {
+    this.productSubcription = this.sanityService
+      .getProduct(slug)
+      .subscribe((res) => {
+        this.product = res;
+        console.log(this.product);
+      });
+  }
 }
