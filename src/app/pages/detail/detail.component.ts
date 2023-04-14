@@ -34,9 +34,8 @@ export class DetailComponent implements OnInit {
   getProduct(slug: string): void {
     this.productSubcription = this.sanityService
       .getProduct(slug)
-      .subscribe((res) => {
-        this.product = res;
-        console.log(this.product);
+      .subscribe((product) => {
+        this.product = product;
       });
   }
 }

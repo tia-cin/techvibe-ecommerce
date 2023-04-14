@@ -111,7 +111,7 @@ export class SanityService {
           `*[_type == 'product' && slug.current match '${slug}']`
         )
         .then((data) => {
-          return data[0];
+          return this.updateImageProp(data[0]);
         })
     );
   }

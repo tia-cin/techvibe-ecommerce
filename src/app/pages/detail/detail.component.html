@@ -1,22 +1,20 @@
 <div>
   <mat-drawer-container class="min-h-screen w-full p-20">
-    <div class="grid grid-cols-2">
+    <div class="grid grid-cols-2" *ngIf="product">
       <div>
-        <img src="https://via.placeholder.com/400" alt="example" />
+        <img [src]="product.image" [alt]="product.slug.current" />
       </div>
       <div class="flex flex-col justify-between">
         <div>
-          <p class="text-4xl">Product Name</p>
-          <p class="text-sm">Category</p>
+          <p class="text-4xl">{{ product.name }}</p>
+          <p class="text-sm">{{ product.category }}</p>
           <p class="text-2xl">Details</p>
           <p class="text-xl">
-            Fugiat irure aliqua laboris cillum laboris sunt esse sint do aute.Ex
-            labore quis enim laborum ullamco.Officia elit tempor elit quis
-            veniam quis incididunt culpa ullamco aliqua officia velit.
+            {{ product.details }}
           </p>
         </div>
         <div class="flex justify-between">
-          <p>Price</p>
+          <p>{{ product.price }}</p>
           <div class="flex justify-between">
             <button class="bg-gray-500 rounded p-2 text-lg">Add to Cart</button>
             <button class="bg-indigo-500 rounded p-2 ml-5 text-lg">
