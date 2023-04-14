@@ -1,6 +1,6 @@
 <main class="bg-neutral-800">
   <app-header-banner *ngIf="banners" [banner]="banners[0]"></app-header-banner>
-  <mat-drawer-container [autosize]="true" class="w-full h-screen">
+  <mat-drawer-container [autosize]="true" class="w-full min-h-screen">
     <mat-drawer mode="side" opened class="p-8">
       <app-filters (currentCategory)="currentCategory($event)"></app-filters>
     </mat-drawer>
