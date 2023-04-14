@@ -11,13 +11,13 @@ export interface CartItem {
 }
 
 export interface Product {
-  id: number;
+  _id: number;
   name: string;
   price: number;
   category: string;
   details: string;
   image: string;
-  slug: string;
+  slug: { current: string };
 }
 
 export interface Banner {
