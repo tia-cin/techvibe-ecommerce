@@ -103,4 +103,12 @@ export class SanityService {
         )
     );
   }
+
+  getProduct(slug: string): Observable<Product> {
+    return from(
+      this.sanityClientCredentials
+        .fetch<Product>(`*[_type == 'product' && slug.current match ${slug}]`)
+        .then((data) => data)
+    );
+  }
 }
