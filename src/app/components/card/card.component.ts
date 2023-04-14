@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 import { Product } from "src/app/types";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-card",
@@ -11,11 +12,15 @@ export class CardComponent implements OnInit {
 
   @Output() addToCart = new EventEmitter();
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
   onAddToCart(): void {
     this.addToCart.emit(this.product);
+  }
+
+  onRedirect(slug: string): void {
+    this.router.navigate(["/product", slug]);
   }
 }

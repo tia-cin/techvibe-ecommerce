@@ -5,9 +5,10 @@
       [ngClass]="{ 'w-full': !fullWidth, 'w-[600px]': fullWidth }"
     >
       <img
+        (click)="onRedirect(product.slug.current)"
         [src]="product.image"
         alt="product.slug.current"
-        class="mb-1 mx-auto h-[200px]"
+        class="mb-1 mx-auto h-[200px] cursor-pointer"
         [ngClass]="{ 'h-[200px]': !fullWidth, 'h-[320px]': fullWidth }"
       />
     </div>
