@@ -25,19 +25,21 @@
       </div>
       <div class="col-span-full">
         <p class="text-center text-3xl">Recomended Products</p>
-        <div
-          className="flex justify-center gap-4 mt-5 track"
+        <mat-grid-list
+          class="py-10"
+          gutterSize="5"
+          [cols]="6"
+          [rowHeight]="420"
           *ngIf="recProducts && recProducts.length"
         >
           <mat-grid-tile *ngFor="let product of recProducts">
             <app-card
               [product]="product"
               class="w-full"
-              [fullWidth]="true"
               (addToCart)="onAddToCart($event)"
             ></app-card>
           </mat-grid-tile>
-        </div>
+        </mat-grid-list>
       </div>
     </div>
   </mat-drawer-container>
