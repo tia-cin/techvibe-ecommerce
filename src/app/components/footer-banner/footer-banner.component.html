@@ -14,7 +14,11 @@
       <p class="font-extrabold text-4xl">{{ banner.midText }}</p>
       <p class="text-lg">{{ banner.desc }}</p>
       <a href="#">
-        <button type="button" class="bg-neutral-800 p-3 rounded text-xl">
+        <button
+          type="button"
+          class="bg-neutral-800 p-3 rounded text-xl"
+          (click)="onCheckout()"
+        >
           {{ banner.buttonText }}
         </button>
       </a>
