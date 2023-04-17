@@ -1,7 +1,7 @@
 <div>
   <mat-drawer-container class="min-h-screen w-full p-20">
     <div class="grid grid-cols-2 gap-10 gap-y-20" *ngIf="product">
-      <div class="bg-white rounded">
+      <div class="bg-white rounded w-[500px]">
         <img [src]="product.image" [alt]="product.slug.current" />
       </div>
       <div class="flex flex-col justify-between">
@@ -37,7 +37,7 @@
           class="py-10"
           gutterSize="5"
           [cols]="6"
-          [rowHeight]="420"
+          [rowHeight]="500"
           *ngIf="recProducts && recProducts.length"
         >
           <mat-grid-tile *ngFor="let product of recProducts">

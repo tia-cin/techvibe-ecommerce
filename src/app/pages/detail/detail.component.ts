@@ -50,7 +50,6 @@ export class DetailComponent implements OnInit {
       .getProducts("6", this.product?.category)
       .subscribe((_products) => {
         this.recProducts = _products;
-        console.log(this.recProducts);
       });
   }
 
