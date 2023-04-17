@@ -24,15 +24,13 @@ export class DetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCurrentPath();
-    if (this.slug) {
-      this.getProduct(this.slug);
-      this.getSimilarProducts();
-    }
   }
 
   getCurrentPath(): void {
-    this.router.url.subscribe((segments) => {
-      this.slug = segments[1].path;
+    this.router.url.subscribe((slug) => {
+      this.slug = slug[1].path;
+      this.getProduct(this.slug);
+      this.getSimilarProducts();
     });
   }
 
@@ -46,7 +44,7 @@ export class DetailComponent implements OnInit {
 
   getSimilarProducts(): void {
     this.recProductsSub = this.sanityService
-      .getProducts("6", "A - Z", this.product?.category)
+      .getProducts("6", this.product?.category)
       .subscribe((_products) => {
         this.recProducts = _products;
         console.log(this.recProducts);
