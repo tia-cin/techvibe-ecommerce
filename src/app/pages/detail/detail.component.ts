@@ -4,6 +4,8 @@ import { SanityService } from "src/app/services/sanity.service";
 import { Product } from "src/app/types";
 import { ActivatedRoute } from "@angular/router";
 import { PurchaseService } from "src/app/services/purchase.service";
+import { HttpClient } from "@angular/common/http";
+import { loadStripe } from "@stripe/stripe-js";
 
 @Component({
   selector: "app-detail",
@@ -19,7 +21,8 @@ export class DetailComponent implements OnInit {
   constructor(
     private sanityService: SanityService,
     private router: ActivatedRoute,
-    private cartService: PurchaseService
+    private cartService: PurchaseService,
+    private client: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -59,5 +62,28 @@ export class DetailComponent implements OnInit {
       price: product.price,
       quantity: 1,
     });
+  }
+
+  onCheckout(): void {
+    this.client
+      .post("http://localhost:4201/checkout", {
+        items: [
+          {
+            image: this.product?.image,
+            name: this.product?.name,
+            price: this.product?.price,
+            quantity: 1,
+            id: this.product?._id,
+          },
+        ],
+      })
+      .subscribe(async (res: any) => {
+        let stripe = await loadStripe(
+          "pk_test_51LqFYzENi5vsUdl1S6DlnTj64Jppk67ktJiaASMWUwXgYyEGgZxtHtcdvDINlnNK537BxkTeoacuedDo8Hjpe8X600jUwt0g3d"
+        );
+        stripe?.redirectToCheckout({
+          sessionId: res.id,
+        });
+      });
   }
 }

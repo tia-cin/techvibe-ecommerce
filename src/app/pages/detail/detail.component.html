@@ -7,7 +7,7 @@
       <div class="flex flex-col justify-between">
         <div>
           <p class="text-4xl">{{ product.name }}</p>
-          <p class="text-sm">{{ product.category }}</p>
+          <p class="text-sm capitalize">{{ product.category }}</p>
           <p class="text-2xl">Details</p>
           <p class="text-xl">
             {{ product.details }}
@@ -16,8 +16,16 @@
         <div class="flex justify-between">
           <p class="text-xl">${{ product.price }}</p>
           <div class="flex justify-between">
-            <button class="bg-gray-500 rounded p-2 text-lg">Add to Cart</button>
-            <button class="bg-indigo-500 rounded p-2 ml-5 text-lg">
+            <button
+              class="bg-gray-500 rounded p-2 text-lg"
+              (click)="onAddToCart(product)"
+            >
+              Add to Cart
+            </button>
+            <button
+              class="bg-indigo-500 rounded p-2 ml-5 text-lg"
+              (click)="onCheckout()"
+            >
               Purchase
             </button>
           </div>
