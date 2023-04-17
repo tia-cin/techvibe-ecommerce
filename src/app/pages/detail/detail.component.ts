@@ -47,7 +47,7 @@ export class DetailComponent implements OnInit {
 
   getSimilarProducts(): void {
     this.recProductsSub = this.sanityService
-      .getProducts("6", this.product?.category)
+      .getProducts("4", this.product?.category)
       .subscribe((_products) => {
         this.recProducts = _products;
       });

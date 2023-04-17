@@ -14,7 +14,9 @@
           </p>
         </div>
         <div class="flex justify-between">
-          <p class="text-xl">${{ product.price }}</p>
+          <p class="text-xl rounded p-2 px-4 bg-white text-black">
+            ${{ product.price }}
+          </p>
           <div class="flex justify-between">
             <button
               class="bg-gray-500 rounded p-2 text-lg"
@@ -36,7 +38,7 @@
         <mat-grid-list
           class="py-10"
           gutterSize="5"
-          [cols]="6"
+          [cols]="4"
           [rowHeight]="500"
           *ngIf="recProducts && recProducts.length"
         >
