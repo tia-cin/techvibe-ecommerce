@@ -9,6 +9,8 @@ import { ActivatedRoute } from "@angular/router";
   templateUrl: "./detail.component.html",
 })
 export class DetailComponent implements OnInit {
+  recProducts: Product[] | undefined;
+  recProductsSub: Subscription | undefined;
   product: Product | undefined;
   productSubcription: Subscription | undefined;
   slug: string | undefined;
@@ -22,6 +24,7 @@ export class DetailComponent implements OnInit {
     this.getCurrentPath();
     if (this.slug) {
       this.getProduct(this.slug);
+      this.getProducts();
     }
   }
 
@@ -36,6 +39,15 @@ export class DetailComponent implements OnInit {
       .getProduct(slug)
       .subscribe((product) => {
         this.product = product;
+      });
+  }
+
+  getProducts(): void {
+    this.recProductsSub = this.sanityService
+      .getProducts("6", "A - Z", this.product?.category)
+      .subscribe((_products) => {
+        this.recProducts = _products;
+        console.log(this.recProducts);
       });
   }
 }
