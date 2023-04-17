@@ -3,6 +3,7 @@ import { Subscription } from "rxjs";
 import { SanityService } from "src/app/services/sanity.service";
 import { Product } from "src/app/types";
 import { ActivatedRoute } from "@angular/router";
+import { PurchaseService } from "src/app/services/purchase.service";
 
 @Component({
   selector: "app-detail",
@@ -17,14 +18,15 @@ export class DetailComponent implements OnInit {
 
   constructor(
     private sanityService: SanityService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private cartService: PurchaseService
   ) {}
 
   ngOnInit(): void {
     this.getCurrentPath();
     if (this.slug) {
       this.getProduct(this.slug);
-      this.getProducts();
+      this.getSimilarProducts();
     }
   }
 
@@ -42,12 +44,22 @@ export class DetailComponent implements OnInit {
       });
   }
 
-  getProducts(): void {
+  getSimilarProducts(): void {
     this.recProductsSub = this.sanityService
       .getProducts("6", "A - Z", this.product?.category)
       .subscribe((_products) => {
         this.recProducts = _products;
         console.log(this.recProducts);
       });
+  }
+
+  onAddToCart(product: Product): void {
+    this.cartService.addToCart({
+      id: product._id,
+      image: product.image,
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+    });
   }
 }

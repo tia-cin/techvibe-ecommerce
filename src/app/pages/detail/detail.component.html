@@ -25,15 +25,18 @@
       </div>
       <div class="col-span-full">
         <p class="text-center text-3xl">Recomended Products</p>
-        <div className="relative h-400 w-full overflow-hidden">
-          <div
-            className="flex justify-center gap-4 mt-5 track"
-            *ngIf="recProducts && recProducts.length"
-          >
-            <mat-grid-tile *ngFor="let product of recProducts">
-              <app-card [product]="product" class="w-full"></app-card>
-            </mat-grid-tile>
-          </div>
+        <div
+          className="flex justify-center gap-4 mt-5 track"
+          *ngIf="recProducts && recProducts.length"
+        >
+          <mat-grid-tile *ngFor="let product of recProducts">
+            <app-card
+              [product]="product"
+              class="w-full"
+              [fullWidth]="true"
+              (addToCart)="onAddToCart($event)"
+            ></app-card>
+          </mat-grid-tile>
         </div>
       </div>
     </div>
